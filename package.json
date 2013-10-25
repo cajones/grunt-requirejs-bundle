@@ -1,6 +1,6 @@
 {
   "name": "grunt-requirejs-bundle",
-  "description": "The best Grunt plugin ever.",
+  "description": "A Grunt plugin to bundle one or more AMD packages into a single define statement. This means you can just require the bundle and get all the packages loaded via requirejs.",
   "version": "0.0.1",
   "homepage": "https://github.com/cajones/grunt-requirejs-bundle",
   "author": {

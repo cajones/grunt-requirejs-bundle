@@ -1,6 +1,6 @@
 # grunt-requirejs-bundle
 
-> The best Grunt plugin ever.
+> A Grunt plugin to bundle one or more AMD packages into a single define statement. This means you can just require the bundle and get all the packages loaded via requirejs.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -17,23 +17,32 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-requirejs-bundle');
 ```
 
-## The "requirejs_bundle" task
+## The "requirejs-bundle" task
 
 ### Overview
-In your project's Gruntfile, add a section named `requirejs_bundle` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `requirejs-bundle` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
-  requirejs_bundle: {
-    options: {
-      // Task-specific options go here.
+  'requirejs-bundle': {
+    components: {
+      src: 'src/components/,
+      dest: 'tmp/components.js'   
     },
-    your_target: {
-      // Target-specific file lists and/or options go here.
+    extensions: {
+      src: 'src/extensions/,
+      dest: 'tmp/extensions.js'   
     },
   },
 })
 ```
+
+The `requirejs-bundle` task will enumerate all packages in the provided src directory and build them into an AMD define statement.
+
+```js
+define(["package1", "package2", "package3" /*and so on*/])
+```
+
 
 ### Options
 

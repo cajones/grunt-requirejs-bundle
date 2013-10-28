@@ -1,0 +1,1 @@
+define(["adapt-plugin1", "adapt-plugin2"]);

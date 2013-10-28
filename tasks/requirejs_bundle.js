@@ -8,43 +8,29 @@
 
 'use strict';
 
+var AMDBundleProcesses = require('./AMDBundleProcesses');
+
 module.exports = function(grunt) {
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
+    var defaultOptions = {}
 
-  grunt.registerMultiTask('requirejs_bundle', 'The best Grunt plugin ever.', function() {
-    // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-      punctuation: '.',
-      separator: ', '
+    grunt.registerMultiTask('requirejs-bundle', 'Grunt plugin to bundle one or more amd packages into a single define statement. This means you can just require the bundle and get all the packages loaded via requirejs.', function() {
+        var bundler = new AMDBundleProcesses(grunt),
+            isDirectory = bundler.isDirectory.bind(bundler),
+            enumerateInstalledPackages  = bundler.enumerateInstalledPackages.bind(bundler),
+            buildAMDModuleDefinition = bundler.buildAMDModuleDefinition.bind(bundler);
+
+
+
+        this.files.forEach(function (file) {
+            var defineStatement = file.src.filter(isDirectory)
+                                       .map(enumerateInstalledPackages)
+                                       .reduce(buildAMDModuleDefinition, 'define([') + ']);'
+
+            console.log(defineStatement);
+            grunt.file.write(file.dest, defineStatement);
+        });
+
     });
-
-    // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
-        }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
-
-      // Handle options.
-      src += options.punctuation;
-
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
-
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
-    });
-  });
 
 };

@@ -1,7 +1,7 @@
 {
   "name": "grunt-requirejs-bundle",
   "description": "A Grunt plugin to bundle one or more AMD packages into a single define statement. This means you can just require the bundle and get all the packages loaded via requirejs.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/cajones/grunt-requirejs-bundle",
   "author": {
     "name": "Chris Jones",
@@ -37,6 +37,6 @@
     "grunt": "~0.4.1"
   },
   "keywords": [
-    "gruntplugin", "requirejs", "amd"
+    "gruntplugin", "requirejs", "amd", "bower"
   ]
 }

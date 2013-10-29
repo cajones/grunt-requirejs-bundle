@@ -1,11 +1,18 @@
-var AMDBundleProcesses = function (grunt){
+var AMDBundleProcesses = function (grunt, options){
     this.grunt = grunt;
+    this.options = options;
 };
 AMDBundleProcesses.prototype.enumerateInstalledPackages = function(path) {
-    return this.grunt.file.expand({
+    var grunt = this.grunt,
+        options = this.options;
+
+    return grunt.file.expand({
         cwd: path,
         filter: 'isDirectory'
-    }, '*');
+    }, '*')
+    .filter(function hasManifest(dir) {
+        return grunt.file.exists(path, dir, options.manifestFile)
+    });
 };
 AMDBundleProcesses.prototype.isDirectory = function(path) {
     return this.grunt.file.isDir(path);

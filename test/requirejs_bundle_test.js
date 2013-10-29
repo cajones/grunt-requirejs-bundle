@@ -31,8 +31,17 @@ exports['requirejs-bundle'] = {
 
     var actual = grunt.file.read('tmp/components.js');
     var expected = grunt.file.read('test/expected/components.js');
-    test.equal(actual, expected, 'should bundle all of the components into a single AMD define statement');
+    test.equal(actual, expected, 'should bundle all of the packages into a single AMD define statement and create the file');
 
     test.done();
+  },
+  donotbundleifempty: function(test) {
+    test.expect(1);
+
+    var actual = grunt.file.exists('tmp/themes.js');
+    var expected = !(grunt.file.expand('test/fixtures/themes/*/bower.json').length === 0); //false if there are no packages installed to this directory
+    test.equal(actual, expected, 'should not create a module if there are no packages.');
+
+    test.done();    
   }
 };

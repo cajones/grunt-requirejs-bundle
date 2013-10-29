@@ -33,6 +33,10 @@ module.exports = function(grunt) {
       components: {
         src: 'test/fixtures/components/',
         dest: 'tmp/components.js'
+      },
+      empty: {
+        src: 'test/fixtures/themes/',
+        dest: 'tmp/themes.js'
       }
     },
 

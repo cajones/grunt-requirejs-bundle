@@ -35,12 +35,12 @@ exports['requirejs-bundle'] = {
 
     test.done();
   },
-  donotbundleifempty: function(test) {
+  empty: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.exists('tmp/themes.js');
-    var expected = !(grunt.file.expand('test/fixtures/themes/*/bower.json').length === 0); //false if there are no packages installed to this directory
-    test.equal(actual, expected, 'should not create a module if there are no packages.');
+    var actual = grunt.file.read('tmp/themes.js');
+    var expected = grunt.file.read('test/expected/themes.js');
+    test.equal(actual, expected, 'should create an empty module if there are no packages.');
 
     test.done();    
   }

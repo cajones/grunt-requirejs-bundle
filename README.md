@@ -85,6 +85,7 @@ Assuming we have a two bower packages (package1 and package2) in the components 
 
 ```js
 define("my-components", ["components/package1/index", "components/package1/index"]);
+```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).

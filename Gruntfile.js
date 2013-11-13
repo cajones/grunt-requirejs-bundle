@@ -32,11 +32,19 @@ module.exports = function(grunt) {
     'requirejs-bundle': {
       components: {
         src: 'test/fixtures/components/',
-        dest: 'tmp/components.js'
+        dest: 'tmp/components.js',
+        options: {
+          moduleName: 'components',
+          baseUrl: 'test/fixtures'
+        }
       },
       empty: {
         src: 'test/fixtures/themes/',
-        dest: 'tmp/themes.js'
+        dest: 'tmp/themes.js',
+        options: {
+          moduleName: 'themes',
+          baseUrl: 'test/fixtures'
+        }
       }
     },
 

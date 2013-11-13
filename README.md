@@ -26,73 +26,73 @@ In your project's Gruntfile, add a section named `requirejs-bundle` to the data 
 grunt.initConfig({
   'requirejs-bundle': {
     components: {
-      src: 'src/components/,
+      src: 'src/components/',
       dest: 'tmp/components.js'   
     },
     extensions: {
-      src: 'src/extensions/,
+      src: 'src/extensions/',
       dest: 'tmp/extensions.js'   
     },
   },
 })
 ```
 
-The `requirejs-bundle` task will enumerate all packages in the provided src directory and build them into an AMD define statement.
+The `requirejs-bundle` task will enumerate all Bower packages (containing bower.json) in the provided src directory and build them into a sinlge AMD define statement.
 
 ```js
 define(["package1", "package2", "package3" /*and so on*/])
 ```
 
+#### Package Main File
+The path to the main javascript file is identified by the 'main' property in each packages bower.json, if this is not present then index.js will be assumed.
+
 
 ### Options
 
-#### options.separator
+#### options.baseUrl
 Type: `String`
-Default value: `',  '`
+Default value: undefined
 
-A string value that is used to do something with whatever.
+Paths of source files globbed in the src parameter can be treated as relative to this path. 
 
-#### options.punctuation
+#### options.moduleName
 Type: `String`
 Default value: `'.'`
 
-A string value that is used to do something else with whatever else.
-
-### Usage Examples
-
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+The AMD define will be called with this as the first parameter.
 
 ```js
-grunt.initConfig({
-  requirejs_bundle: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
+define("module-name", ["package1", "package2", "package3" /*and so on*/])
 ```
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+#### Options Example
+In this example, custom options are used bundle all the packages in the components directory into a single AMD module called 'my-components', the module is going to be compiled by [requirejs](http://requirejs.org/) with the baseUrl set to 'src', so we also set the 'requirejs-bundle' baseUrl to make the paths the same.
 
 ```js
 grunt.initConfig({
   requirejs_bundle: {
+    src: 'src/components/',
+    dest: 'tmp/my-components.js'
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+      moduleName: 'my-components',
+      baseUrl: 'src'
+    }
   },
 })
 ```
+
+Assuming we have a two bower packages (package1 and package2) in the components directory, the resulting AMD module will look like this:-
+
+```js
+define("my-components", ["components/package1/index", "components/package1/index"]);
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+0.0.1
+0.0.2
+0.0.3
+0.0.4
+0.0.5
+0.0.6

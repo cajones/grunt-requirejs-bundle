@@ -1,6 +1,6 @@
 {
 	"name": "adapt-plugin-2",
-	"main": "js/index.js",
+	"main": "js/main.js",
 	"dependencies": {
 		
 	}

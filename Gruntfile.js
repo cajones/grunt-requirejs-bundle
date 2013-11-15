@@ -34,6 +34,7 @@ module.exports = function(grunt) {
         src: 'test/fixtures/components/',
         dest: 'tmp/components.js',
         options: {
+          requireCall: 'require',
           moduleName: 'components',
           baseUrl: 'test/fixtures'
         }
@@ -42,6 +43,7 @@ module.exports = function(grunt) {
         src: 'test/fixtures/themes/',
         dest: 'tmp/themes.js',
         options: {
+          requireCall: 'define',
           moduleName: 'themes',
           baseUrl: 'test/fixtures'
         }

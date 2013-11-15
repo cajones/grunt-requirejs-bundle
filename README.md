@@ -37,7 +37,7 @@ grunt.initConfig({
 })
 ```
 
-The `requirejs-bundle` task will enumerate all Bower packages (containing bower.json) in the provided src directory and build them into a sinlge AMD define statement.
+The `requirejs-bundle` task will enumerate all Bower packages (containing bower.json) in the provided src directory and build them into a single AMD statement.
 
 ```js
 define(["package1", "package2", "package3" /*and so on*/])
@@ -59,7 +59,15 @@ Paths of source files globbed in the src parameter can be treated as relative to
 Type: `String`
 Default value: `'.'`
 
-The AMD define will be called with this as the first parameter.
+The AMD call will be called with this as the first parameter.
+
+#### options.requireCall
+Type: `String`
+Default value: `'require'`
+Possible values: `'require'` or `'define'`
+
+The requirejs-bundle task will emit either an AMD require statement or an AMD define.
+The default is an AMD require.
 
 ```js
 define("module-name", ["package1", "package2", "package3" /*and so on*/])
@@ -91,9 +99,10 @@ define("my-components", ["components/package1/index", "components/package1/index
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-0.0.1
-0.0.2
-0.0.3
-0.0.4
-0.0.5
-0.0.6
+* 0.0.7 - Added support for requireCall option
+* 0.0.6 - expand the full package name
+* 0.0.5 
+* 0.0.4 
+* 0.0.3 
+* 0.0.2 
+* 0.0.1 

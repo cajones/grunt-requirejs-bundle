@@ -99,6 +99,7 @@ define("my-components", ["components/package1/index", "components/package1/index
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+* 0.0.8 - Fixed a bug that added the module name to require() calls
 * 0.0.7 - Added support for requireCall option
 * 0.0.6 - expand the full package name
 * 0.0.5 

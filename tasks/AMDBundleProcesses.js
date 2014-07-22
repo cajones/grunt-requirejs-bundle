@@ -13,12 +13,14 @@ AMDBundleProcesses.prototype.enumerateInstalledPackages = function(path) {
     var grunt = this.grunt,
         options = this.options;
         
+    var include = options.include || '*';
+
     return {
         path: path,
         packageNames: grunt.file.expand({
                                 cwd: path, 
                                 filter: 'isDirectory'
-                            }, '*')
+                            }, include)
                             .filter(function hasManifest(dir) {
                                 return grunt.file.exists(path, dir, options.manifestFile)
                             }) || []

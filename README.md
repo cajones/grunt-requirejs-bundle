@@ -55,6 +55,12 @@ Default value: undefined
 
 Paths of source files globbed in the src parameter can be treated as relative to this path. 
 
+#### options.include
+Type: `String`
+Default value: `'*'`
+
+Packages that are bundled with this task are only included if their name matches this grunt filespec pattern.
+
 #### options.moduleName
 Type: `String`
 Default value: `'.'`

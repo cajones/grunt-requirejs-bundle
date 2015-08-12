@@ -46,7 +46,6 @@ define(["package1", "package2", "package3" /*and so on*/])
 #### Package Main File
 The path to the main javascript file is identified by the 'main' property in each packages bower.json, if this is not present then index.js will be assumed.
 
-
 ### Options
 
 #### options.baseUrl
@@ -74,6 +73,21 @@ Possible values: `'require'` or `'define'`
 
 The requirejs-bundle task will emit either an AMD require statement or an AMD define.
 The default is an AMD require.
+
+#### options.appOverrideUrl
+Type: `String`
+Default value: `undefined`
+
+Directory to look for overrides in. Files found in this directory will superceed the files found elsewhere.
+Requires `options.requireOverrideBaseUrl` to be set.
+
+
+#### options.requireOverrideBaseUrl
+Type: `String`
+Default value: `undefined`
+
+The require path to prepend to each overridden file.
+Requires `options.appOverrideUrl` to be set.
 
 ```js
 define("module-name", ["package1", "package2", "package3" /*and so on*/])

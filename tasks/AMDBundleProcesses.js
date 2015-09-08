@@ -30,13 +30,20 @@ AMDBundleProcesses.prototype.expandFullPackagePath = function (baseUrl) {
     var grunt = this.grunt,
         options = this.options;
 
-    return function (target) {    
+    return function (target) {
         var expandedPackagePaths = target.packageNames.map(function (packageName) {
                 var manifestFilePath = path.join(target.path, packageName, options.manifestFile),
                     mainFile = getJavascriptMainFile(grunt.file.readJSON(manifestFilePath)),
                     packageUrl = new Url(target.path, packageName, mainFile);
 
-                return packageUrl.makeRelative(baseUrl).href;
+                if (options.appOverrideUrl
+                        && options.requireOverrideBaseUrl
+                        && grunt.file.exists(new Url(options.appOverrideUrl, packageName, mainFile).href+'.js')) {
+                    return new Url(options.requireOverrideBaseUrl, packageName, mainFile).href;
+                } else {
+                    return packageUrl.makeRelative(baseUrl).href;
+                }
+
             });
 
         return {

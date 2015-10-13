@@ -21,6 +21,10 @@ AMDBundleProcesses.prototype.enumerateInstalledPackages = function(path) {
                                 cwd: path, 
                                 filter: 'isDirectory'
                             }, include)
+                            .filter(function(dir) {
+                                if(options.filter) return options.filter(dir)
+                                else return true;
+                            })
                             .filter(function hasManifest(dir) {
                                 return grunt.file.exists(path, dir, options.manifestFile)
                             }) || []

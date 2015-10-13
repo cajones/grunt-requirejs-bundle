@@ -12,19 +12,23 @@ AMDBundleProcesses.prototype.isDirectory = function (path) {
 AMDBundleProcesses.prototype.enumerateInstalledPackages = function(path) {
     var grunt = this.grunt,
         options = this.options;
-        
+
     var include = options.include || '*';
 
     return {
         path: path,
         packageNames: grunt.file.expand({
-                                cwd: path, 
+                                cwd: path,
                                 filter: 'isDirectory'
                             }, include)
+                            .filter(function(dir) {
+                                if(options.filter) return options.filter(dir)
+                                else return true;
+                            })
                             .filter(function hasManifest(dir) {
                                 return grunt.file.exists(path, dir, options.manifestFile)
                             }) || []
-    };       
+    };
 };
 AMDBundleProcesses.prototype.expandFullPackagePath = function (baseUrl) {
     var grunt = this.grunt,

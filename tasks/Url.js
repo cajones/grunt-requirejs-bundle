@@ -1,3 +1,4 @@
+var path = require('path');
 var Url = function (/*parts*/) {
     var parts = Array.prototype.slice.call(arguments) || [],
         output = parts[0];
@@ -14,7 +15,14 @@ var Url = function (/*parts*/) {
 Url.prototype.makeRelative = function (base) {
     if(base === undefined) return this;
 
-    this.href = (this.href || '').replace(new RegExp('^\/?'+base+'\/?', 'i'), '');
+    // remove base path from href
+    var relative = path.relative(base, (this.href || ''));
+    // swap backslashes for forwardslashes
+    // TODO do something better here...
+    var converted = relative.replace(new RegExp('\\\\','g'), '/');
+
+    this.href = converted;
+
     return this;
 };
 
